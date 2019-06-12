@@ -54,7 +54,7 @@ app.post('/hello',function(req,res){
 					  "shouldEndSession": false,
 					  "outputSpeech": {
 						"type": "SSML",
-						"ssml": "<speak>" + "AC turned on" + "</speak>"
+						"ssml": "AC turned on" 
 					  }
 					}
 				});
