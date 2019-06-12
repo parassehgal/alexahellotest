@@ -25,18 +25,55 @@ app.post('/hello',function(req,res){
 		});
 	}
 	else if (req.body.request.type === 'IntentRequest') {
-		var speechText = 'Hii this is intent request';
-		var speechOutput = "<speak>" + speechText + "</speak>"
-		res.json({
-		"version": "1.0",
-			"response": {
-			  "shouldEndSession": false,
-			  "outputSpeech": {
-				"type": "SSML",
-				"ssml": speechOutput
-			  }
-			}
-		});
+		
+		switch (req.body.request.intent.name)
+		{
+			case 'HelloWorldIntent':
+			var speechText = 'Hii this is inside helloworld intent ';
+			var speechOutput = "<speak>" + speechText + "</speak>"
+			res.json({
+			"version": "1.0",
+				"response": {
+				  "shouldEndSession": false,
+				  "outputSpeech": {
+					"type": "SSML",
+					"ssml": speechOutput
+				  }
+				}
+			});
+			break;
+			
+			case 'SlotIntent':
+			var speechText = 'Hii this is inside slot intent ';
+			var speechOutput = "<speak>" + speechText + "</speak>"
+			res.json({
+			"version": "1.0",
+				"response": {
+				  "shouldEndSession": false,
+				  "outputSpeech": {
+					"type": "SSML",
+					"ssml": speechOutput
+				  }
+				}
+			});
+			break;
+			
+			default : 
+			var speechText = 'Hii  ';
+			var speechOutput = "<speak>" + speechText + "</speak>"
+			res.json({
+			"version": "1.0",
+				"response": {
+				  "shouldEndSession": false,
+				  "outputSpeech": {
+					"type": "SSML",
+					"ssml": speechOutput
+				  }
+				}
+			});
+		}
+		
+		
 	}
 
 }).listen(process.env.PORT||9879);
