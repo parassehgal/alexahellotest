@@ -2,12 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-/*app.use(bodyParser.json({
-  verify: function getRawBody(req, res, buf) {
-    req.rawBody = buf.toString();
-  }
-}));*/
-
 app.use(
 		bodyParser.urlencoded(
 		{ extended: true })
@@ -50,18 +44,36 @@ app.post('/hello',function(req,res){
 			break;
 			
 			case 'SlotIntent':
-			var speechText = 'Hii this is inside slot intent ';
-			var speechOutput = "<speak>" + speechText + "</speak>"
-			res.json({
-			"version": "1.0",
-				"response": {
-				  "shouldEndSession": false,
-				  "outputSpeech": {
-					"type": "SSML",
-					"ssml": speechOutput
-				  }
-				}
-			});
+			if(req.body.request.intent.slots.stateonoff.value == 'on')
+			{
+				//var speechText = 'Hii this is inside slot intent ';
+				//var speechOutput = "<speak>" + speechText + "</speak>"
+				res.json({
+				"version": "1.0",
+					"response": {
+					  "shouldEndSession": false,
+					  "outputSpeech": {
+						"type": "SSML",
+						"ssml": "<speak>" + "AC turned on" + "</speak>"
+					  }
+					}
+				});
+			}
+			else if(req.body.request.intent.slots.stateonoff.value == 'off'){
+				var speechText = 'ac turned offf ';
+				var speechOutput = "<speak>" + speechText + "</speak>"
+				res.json({
+				"version": "1.0",
+					"response": {
+					  "shouldEndSession": false,
+					  "outputSpeech": {
+						"type": "SSML",
+						"ssml": speechOutput
+					  }
+					}
+				});
+			}
+			
 			break;
 			
 			default : 
