@@ -2,11 +2,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
-app.use(bodyParser.json({
+/*app.use(bodyParser.json({
   verify: function getRawBody(req, res, buf) {
     req.rawBody = buf.toString();
   }
-}));
+}));*/
+
+app.use(
+		bodyParser.urlencoded(
+		{ extended: true })
+	);
+app.use(bodyParser.json());
 
 app.post('/hello',function(req,res){
 
